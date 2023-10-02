@@ -48,9 +48,12 @@ const TitleForm: React.FC<TitleFormProps> = ({initialData, courseId}) => {
 
       const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-          const res = await axios.post("/api/courses", values);
-          router.push(`/teacher/courses/${res.data.id}`);
-          toast.success("course created successfully");
+          const res = await axios.patch(`/api/courses/${courseId}`, values);
+
+          toast.success("course updated successfully");
+          toggleEdit();
+          router.refresh();
+
         } catch (error) {
           toast.error("something went wrong");
         }
@@ -76,6 +79,20 @@ const TitleForm: React.FC<TitleFormProps> = ({initialData, courseId}) => {
         {isEditing && (
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} >
+                    <FormField control={form.control} name={'title'} render={({field}) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input disabled={isSubmitting} placeholder='e.g. "Advanced Web Development"' {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}  />
+                    <div className='flex items-center gap-x-2 mt-[1rem]'>
+                        <Button disabled={!isValid || isSubmitting} type='submit' >
+                            Save
+                        </Button>
+
+                    </div>
 
                 </form>
             </Form>
