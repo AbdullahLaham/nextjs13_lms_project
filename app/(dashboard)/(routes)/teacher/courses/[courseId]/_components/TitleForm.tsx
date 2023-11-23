@@ -83,6 +83,7 @@ const TitleForm: React.FC<TitleFormProps> = ({initialData, courseId}) => {
                         <FormItem>
                             <FormControl>
                                 <Input disabled={isSubmitting} placeholder='e.g. "Advanced Web Development"' {...field} />
+                            
                             </FormControl>
                             <FormMessage />
                         </FormItem>
