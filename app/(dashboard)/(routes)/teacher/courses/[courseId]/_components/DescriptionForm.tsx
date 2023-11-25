@@ -27,6 +27,8 @@ interface DescriptionFormProps {
     initialData: Course,
     courseId: string,
 }
+
+
 const DescriptionForm = ({initialData, courseId}: DescriptionFormProps) => {
      // router
      const router = useRouter();

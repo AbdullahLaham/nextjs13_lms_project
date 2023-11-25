@@ -7,6 +7,8 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 import TitleForm from './_components/TitleForm';
 import DescriptionForm from './_components/DescriptionForm';
+import ImageForm from './_components/ImageForm';
+import CategoryForm from './_components/CategoryForm';
 
 const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
     const {userId} = auth();
@@ -15,7 +17,15 @@ const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
             id: params.courseId,
         }
     });
+
+    const categories = await db.category.findMany({
+      orderBy: {
+        name: "asc",
+      },
+    });
+
     
+    console.log(categories, 'categ')
     if (!userId || !course) return redirect("/");
 
     const requiredFields = [
@@ -49,7 +59,10 @@ const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
             </div>,
             <TitleForm initialData={course} courseId={params?.courseId} />
             <DescriptionForm initialData={course} courseId={params?.courseId} />
-            <DescriptionForm initialData={course} courseId={params?.courseId} />
+            <ImageForm initialData={course} courseId={params?.courseId} />
+            <CategoryForm initialData={course} courseId={params?.courseId} options={categories.map(({name, id}) => (
+              {label: name, value: id}
+            ))} />
         </div>
     
       </div>

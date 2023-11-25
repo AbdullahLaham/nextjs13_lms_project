@@ -36,7 +36,12 @@ const ImageForm = ({initialData, courseId}: ImageFormProps) => {
   const router = useRouter();
 
   const [isEditing, setIsEditing] = useState(false);
-  const toggleEdit = () => setIsEditing(current => !current)
+
+  const toggleEdit = () => {
+    setIsEditing(current => !current)
+  }
+
+
   const formSchema = z.object({
     imageUrl: z.string().min(1, {
           message: "imageUrl is required"
@@ -88,27 +93,29 @@ const ImageForm = ({initialData, courseId}: ImageFormProps) => {
             </Button>
         </div>
         {!isEditing && 
-          !initialData?.imageUrl ? (
-            <div className='h-60 flex item-center justify-center bg-slate-200 rounded-md'>
+          !initialData?.imageUrl && (
+            <div onClick={toggleEdit} className='h-60 flex items-center justify-center bg-slate-200 rounded-md mt-5 cursor-pointer'>
               <ImageIcon className='h-10 w-10 text-slate-500' />
             </div>
-          ) : ( 
+          )
+        }
+
+        {
+          !isEditing && initialData?.imageUrl && (
             <div className='relative aspect-video mt-2'>
               <Image fill src={initialData?.imageUrl || ""} alt={initialData.title} className='object-cover rounded-md'  />
             </div>
           )
-        
-            
         }
+        
         {isEditing && (
           <div>
-            <FileUpload
+              <div className='' >
+              <FileUpload
               endpoint='courseImage' onChange={(url) => {
                 if (url) onSubmit({imageUrl: url})
 
               }} />
-              <div className='' >
-
               </div>
 
           </div>
