@@ -26,7 +26,7 @@ import {
     onChange: (value: string) => void;
  }
  
-export const combobox = ({options, value, onChange}: ComboboxProps) => {
+export const Combobox = ({options, value, onChange}: ComboboxProps) => {
   const [open, setOpen] = React.useState(false)
  
   return (

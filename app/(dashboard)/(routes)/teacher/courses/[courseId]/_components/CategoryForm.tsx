@@ -22,6 +22,7 @@ import toast from 'react-hot-toast';
 import { Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
+import { Combobox } from '@/components/ui/combobox';
 
 interface CategoryFormProps {
     initialData: Course,
@@ -92,8 +93,7 @@ return (
                   <FormField control={form.control} name={'categoryId'} render={({field}) => (
                       <FormItem>
                           <FormControl>
-                              {/* <Textarea disabled={isSubmitting} placeholder='e.g. "This Course is about ..."' {...field} />
-                           */}
+                            <Combobox options={options} {...field} />
                           </FormControl>
                           <FormMessage />
                       </FormItem>
@@ -108,10 +108,6 @@ return (
               </form>
           </Form>
       )}
-      
-
-
-    
   </div>
 )
 }
