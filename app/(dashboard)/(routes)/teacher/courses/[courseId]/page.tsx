@@ -12,8 +12,12 @@ import CategoryForm from './_components/CategoryForm';
 import PriceForm from './_components/PriceForm';
 import AttachmentForm from './_components/AttchmentForm';
 import ChapterForm from './_components/ChapterForm';
+import Banner from '@/components/banner';
+import Actions from './_components/Actions';
 
 const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
+
+
     const {userId} = auth();
 
     if (!userId) {
@@ -39,6 +43,8 @@ const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
         }
     });
 
+    
+
     const categories = await db.category.findMany({
       orderBy: {
         name: "asc",
@@ -46,7 +52,8 @@ const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
     });
 
     
-    console.log(categories, 'categ')
+    console.log(categories, 'categ');
+
     if (!userId || !course) return redirect("/");
 
     const requiredFields = [
@@ -56,23 +63,36 @@ const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
         course.price,
         course.categoryId,
         course.chapters.some(chapter => chapter.isPublished),
-
     ];
 
-    const totalFields = requiredFields.length;
-    const completedFields = requiredFields.filter(Boolean).length;
 
+    const totalFields = requiredFields.length;
+
+    const completedFields = requiredFields.filter(Boolean).length;
+    
     let completionText = `(${completedFields} / ${totalFields})`;
+    
+    const isComplete = requiredFields.every(Boolean);
 
   return (
-    <div className='p-6 '>
-        <div className='flex items-center justify-between '>
+    <div className='p-6'>
+      {
+        !course?.isPublished && (
+          <Banner label='this course is unpublished, it will not be visible to the students' />
+        )
+      }
+        <div className='flex items-center justify-between'>
+          <div>
             <div className='flex flex-col gap-y-2'>
-                <h1 className='text-2xl font-medium'>Course Setup</h1>
-                <span className='text-sm text-slate-700'> Complete All fields {completionText} </span>
-            </div>
+              <h1 className='text-2xl font-medium'>Cource Setup</h1>
+              <span className=''>complete All fields {completionText}</span>
 
+            </div>
+            {/*Add Actions */}
+            <Actions disabled={!isComplete} courseId={params.courseId} isPublished={course.isPublished} />
+          </div>
         </div>
+        
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 '>
 
         <div>

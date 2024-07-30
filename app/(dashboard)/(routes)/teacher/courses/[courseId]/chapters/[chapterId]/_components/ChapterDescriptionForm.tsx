@@ -1,6 +1,6 @@
 "use client"
 
-import { Course } from '@prisma/client';
+import { Chapter, Course } from '@prisma/client';
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as z from 'zod';
@@ -22,14 +22,17 @@ import toast from 'react-hot-toast';
 import { Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
+import { Editor } from '@/components/editor';
+import { Preview } from '@/components/preview';
 
-interface DescriptionFormProps {
-    initialData: Course,
+interface ChapterDescriptionFormProps {
+    initialData: Chapter,
     courseId: string,
+    chapterId: string,
 }
 
 
-const DescriptionForm = ({initialData, courseId}: DescriptionFormProps) => {
+const ChapterDescriptionForm = ({initialData, courseId, chapterId}: ChapterDescriptionFormProps) => {
      // router
      const router = useRouter();
 
@@ -37,9 +40,7 @@ const DescriptionForm = ({initialData, courseId}: DescriptionFormProps) => {
      const toggleEdit = () => setIsEditing(current => !current);
 
      const formSchema = z.object({
-         description: z.string().min(1, {
-             message: "title is required"
-         })
+         description: z.string().min(1)
      });
 
 
@@ -54,9 +55,9 @@ const DescriptionForm = ({initialData, courseId}: DescriptionFormProps) => {
  
        const onSubmit = async (values: z.infer<typeof formSchema>) => {
          try {
-           const res = await axios.patch(`/api/courses/${courseId}`, values);
+           const res = await axios.patch(`/api/courses/${courseId}/chapter/${chapterId}`, values);
  
-           toast.success("course updated successfully");
+           toast.success("chapter updated successfully");
            toggleEdit();
            router.refresh();
  
@@ -68,7 +69,7 @@ const DescriptionForm = ({initialData, courseId}: DescriptionFormProps) => {
   return (
     <div className='mt-6 border bg-slate-100 rounded-md p-4'>
         <div className='fomt-medium flex items-center justify-between '>
-            Course Description
+            Chapter Description
             <Button variant={'ghost'} onClick={toggleEdit}>
                 {!isEditing ? <><Pencil className='w-4 h-4 mr-2' /> Edit Description</> : 'Cancel'}
             </Button>
@@ -76,9 +77,14 @@ const DescriptionForm = ({initialData, courseId}: DescriptionFormProps) => {
         </div>
         {!isEditing && 
             ( 
-                <p className={cn("text-sm mt-2 ", !initialData?.description && "text-slate-500 italic ")}>
-                    {initialData?.description || "No Description"}
-                </p>
+                <div className={cn("text-sm mt-2 ", !initialData?.description && "text-slate-500 italic ")}>
+                    {!initialData?.description && "No Description"}
+                    {
+                        initialData?.description && (
+                            <Preview value={initialData?.description} />
+                        )
+                    }
+                </div>
             )
         }
         {isEditing && (
@@ -87,7 +93,7 @@ const DescriptionForm = ({initialData, courseId}: DescriptionFormProps) => {
                     <FormField control={form.control} name={'description'} render={({field}) => (
                         <FormItem>
                             <FormControl>
-                                <Textarea disabled={isSubmitting} placeholder='e.g. "This Course is about ..."' {...field} />
+                                <Editor {...field} />
                             
                             </FormControl>
                             <FormMessage />
@@ -111,4 +117,4 @@ const DescriptionForm = ({initialData, courseId}: DescriptionFormProps) => {
   )
 }
 
-export default DescriptionForm
+export default ChapterDescriptionForm

@@ -15,6 +15,9 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
                 userId: userId,
             }
         });
+
+
+        
         if (!courseOwner) {
             return new NextResponse("Unauthorized", {status: 401});
         }

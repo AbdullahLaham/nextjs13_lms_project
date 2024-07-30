@@ -31,7 +31,6 @@ interface AttachmentFormProps {
 }
 
 
-
 const AttachmentForm = ({initialData, courseId}: AttachmentFormProps) => {
   const router = useRouter();
 
@@ -41,7 +40,6 @@ const AttachmentForm = ({initialData, courseId}: AttachmentFormProps) => {
   const toggleEdit = () => {
     setIsEditing(current => !current)
   }
-
 
     const formSchema = z.object({
       url: z.string().min(1),
@@ -61,6 +59,9 @@ const AttachmentForm = ({initialData, courseId}: AttachmentFormProps) => {
       }
       
     }
+
+
+
     const onDelete = async (id: string) => {
       try {
         setDeletingId(id);
@@ -73,6 +74,7 @@ const AttachmentForm = ({initialData, courseId}: AttachmentFormProps) => {
         setDeletingId(null);
       }
     }
+   
   return (
     <div className='mt-6 border bg-slate-100 rounded-md p-4'>
         <div className='fomt-medium flex items-center justify-between '>
@@ -88,6 +90,9 @@ const AttachmentForm = ({initialData, courseId}: AttachmentFormProps) => {
                 }
             </Button>
         </div>
+
+       
+        
         {!isEditing && 
           initialData?.attachments?.length === 0 && (
             <div onClick={toggleEdit} className='text-sm mt-2 text-slate-500 italic'>
@@ -95,6 +100,7 @@ const AttachmentForm = ({initialData, courseId}: AttachmentFormProps) => {
             </div>
           )
         }
+
 
 
         {
@@ -122,6 +128,7 @@ const AttachmentForm = ({initialData, courseId}: AttachmentFormProps) => {
             </div>
           )
         }
+
         
         {isEditing && (
           <div>
@@ -137,7 +144,9 @@ const AttachmentForm = ({initialData, courseId}: AttachmentFormProps) => {
               </div>
 
           </div>
-        )}
+        )}        
+
+
     </div>
   )
 }

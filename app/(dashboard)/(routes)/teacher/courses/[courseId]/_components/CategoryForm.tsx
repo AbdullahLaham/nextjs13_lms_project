@@ -19,7 +19,7 @@ import {
   import { Input } from '@/components/ui/input';
   import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
-import { Pencil } from 'lucide-react';
+import { Loader, Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
 import { Combobox } from '@/components/ui/combobox';
@@ -42,7 +42,6 @@ const CategoryForm = ({initialData, courseId, options}: CategoryFormProps) => {
            message: "category is required"
        })
    });
-
 
 
    const form = useForm<z.infer<typeof formSchema>>  ({
@@ -69,12 +68,13 @@ const CategoryForm = ({initialData, courseId, options}: CategoryFormProps) => {
        }
        
      }
+
 return (
   <div className='mt-6 border bg-slate-100 rounded-md p-4'>
-      <div className='fomt-medium flex items-center justify-between '>
+      <div className='font-medium flex items-center justify-between '>
           Course Category
-          <Button variant={'ghost'} onClick={toggleEdit}>
-              {!isEditing ? <><Pencil className='w-4 h-4 mr-2' /> Edit Category</> : 'Cancel'}
+          <Button variant={'ghost'} onClick={toggleEdit} >
+              {!isEditing ? <><Pencil className='w-4 h-4 mr-2' /> Edit Category</> : <> Cancel</>}
           </Button>
 
       </div>
@@ -84,6 +84,7 @@ return (
               <p className={cn("text-sm mt-2 ", !initialData?.categoryId && "text-slate-500 italic ")}>
                   {initialData?.categoryId || "No Category"}
               </p>
+              
           )
       }
 

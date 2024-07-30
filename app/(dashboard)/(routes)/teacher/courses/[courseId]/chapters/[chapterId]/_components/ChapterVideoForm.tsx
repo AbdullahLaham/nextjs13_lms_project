@@ -1,12 +1,13 @@
 "use client"
 
-import { Course } from '@prisma/client'
+import { Chapter, MuxData } from '@prisma/client'
 import React, { useState } from 'react'
 import axios from 'axios'
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import {useForm} from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import MuxPlayer from '@mux/mux-player-react';
 import {
     Form,
     FormControl,
@@ -19,20 +20,22 @@ import {
   import { Input } from '@/components/ui/input';
   import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
-import { ImageIcon, Pencil, PlusCircle } from 'lucide-react';
+import { ImageIcon, Pencil, PlusCircle, VideoIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
 import Image from 'next/image';
 import FileUpload from '@/components/FileUpload';
+import { isMapIterator } from 'util/types';
 
-interface ImageFormProps {
-    initialData: Course,
+interface ChapterVideoProps {
+    initialData: Chapter & {muxData?: MuxData | null},
     courseId: string,
+    chapterId: string,
 }
 
 
 
-const ImageForm = ({initialData, courseId}: ImageFormProps) => {
+const ChapterVideo = ({initialData, courseId, chapterId}: ChapterVideoProps) => {
   const router = useRouter();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -43,14 +46,12 @@ const ImageForm = ({initialData, courseId}: ImageFormProps) => {
 
 
   const formSchema = z.object({
-    imageUrl: z.string().min(1, {
-          message: "imageUrl is required"
-      })
+    videoUrl: z.string().min(1)
   });
   const form = useForm<z.infer<typeof formSchema>>  ({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        imageUrl: initialData?.imageUrl || "",
+        videoUrl: initialData?.videoUrl || "",
       },
   
     });
@@ -59,9 +60,9 @@ const ImageForm = ({initialData, courseId}: ImageFormProps) => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
       try {
-        const res = await axios.patch(`/api/courses/${courseId}`, values);
+        const res = await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
 
-        toast.success("course updated successfully");
+        toast.success("chapter updated successfully");
         toggleEdit();
         router.refresh();
 
@@ -74,37 +75,39 @@ const ImageForm = ({initialData, courseId}: ImageFormProps) => {
   return (
     <div className='mt-6 border bg-slate-100 rounded-md p-4'>
         <div className='font-medium flex items-center justify-between '>
-            Course Image
+            Chapter Video
             <Button variant={'ghost'} onClick={toggleEdit} >
                 {isEditing && <>Cancel</>}
-                {!isEditing && !initialData?.imageUrl && 
+                {!isEditing && !initialData?.videoUrl && 
                   (
                     <>
-                      <PlusCircle className='h-4 w-4 mr-2' /> Add An Image
+                      <PlusCircle className='h-4 w-4 mr-2' /> Add A video
                     </>
                   )
                 }
-                {!isEditing && initialData?.imageUrl && 
+                {!isEditing && initialData?.videoUrl && 
                   (
                     <>
-                      <Pencil className='h-4 w-4 mr-2' /> Edit Image
+                      <Pencil className='h-4 w-4 mr-2' /> Edit Video
                     </>
                   )
                 }
             </Button>
         </div>
         {!isEditing && 
-          !initialData?.imageUrl && (
+          !initialData?.videoUrl && (
             <div onClick={toggleEdit} className='h-60 flex items-center justify-center bg-slate-200 rounded-md mt-5 cursor-pointer'>
-              <ImageIcon className='h-10 w-10 text-slate-500' />
+              <VideoIcon className='h-10 w-10 text-slate-500' />
             </div>
           )
         }
 
         {
-          !isEditing && initialData?.imageUrl && (
+          !isEditing && initialData?.videoUrl && (
             <div className='relative aspect-video mt-2'>
-              <Image fill src={initialData?.imageUrl || ""} alt={initialData.title} className='object-cover rounded-md'  />
+              <MuxPlayer 
+              playbackId={initialData?.muxData?.playbackId || ""} 
+               />
             </div>
           )
         }
@@ -113,27 +116,32 @@ const ImageForm = ({initialData, courseId}: ImageFormProps) => {
           <div>
               <div className='' >
               <FileUpload
-              endpoint='courseImage' onChange={(url) => {
-                if (url) onSubmit({imageUrl: url})
+              endpoint='chapterVideo' onChange={(url) => {
+                if (url) onSubmit({videoUrl: url})
 
               }} />
+              <div className='text-xs text-muted-foreground mt-4'>
+                upload this chapter&aspos;s video
+
               </div>
 
           </div>
+          </div>
         )}
+        {!isEditing && initialData?.videoUrl && 
+                  (
+                    <div>
+                      
+                    </div>
+                  )
+        }
+        
+        
     </div>
   )
 }
 
-export default ImageForm
+export default ChapterVideo
 
-// const onDragEnd = (result: DropResult) => {
-//   if (!result.destination) return;
-//   const startIndex = Math.min(result.source.index, result.destination.index);
-//   const endIndex = Math.max(result.source.index, result.destination.index);
-//   const copyChapters = [...chapters];
-//   const [reorderedItem] = copyChapters.splice(startIndex,1);
-//   copyChapters.splice(endIndex,0,reorderedItem)
-//   setChapters(copyChapters);
 
-// }
+
