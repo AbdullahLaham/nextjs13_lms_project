@@ -5,7 +5,7 @@ type ConfettiStore = {
     onOpen: () => void;
     onClose: () => void;
 }
-export const useConfettiStor = create<ConfettiStore>((set) => ({
+export const useConfettiStore = create<ConfettiStore>((set) => ({
     isOpen: false,
     onOpen: () => set({isOpen: true}),
     onClose: () => set({isOpen: false})

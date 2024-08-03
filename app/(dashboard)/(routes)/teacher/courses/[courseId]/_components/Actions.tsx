@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+"use client"
+
 import ConfirmModel from '@/components/models/ConfirmModel'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast';
-import { useConfettiStor } from '@/hooks/useConfettiStore'
+import { useConfettiStore } from '@/hooks/useConfettiStore'
+import React, { useState } from 'react'
 
 interface ActionsProps {
     disabled: boolean,
@@ -15,7 +17,7 @@ interface ActionsProps {
 const Actions = ({disabled, courseId, isPublished}: ActionsProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
-    const confetti = useConfettiStor();
+    const confetti = useConfettiStore();
 
     const togglePublish = async () => {
         try {

@@ -1,5 +1,5 @@
 "use client"
-import ReactConfetti from 'react-cinfetti';
+import ReactConfetti from 'react-confetti';
 import {useConfettiStore} from '@/hooks/useConfettiStore'
 const ConfettiProvider = () => {
     const confetti = useConfettiStore();

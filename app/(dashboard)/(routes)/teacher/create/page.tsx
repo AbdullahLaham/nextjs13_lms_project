@@ -29,13 +29,15 @@ const CreateCoursePage = () => {
   // router
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>  ({
+  const form = useForm<z.infer<typeof formSchema>> ({
     resolver: zodResolver(formSchema),
     defaultValues: {
         title: '',
     },
 
   });
+
+
   const { isSubmitting, isValid } = form.formState;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
