@@ -3,6 +3,7 @@ import Mux from '@mux/mux-node'
 import { auth } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
 import { NextResponse } from "next/server";
+import { isTeacher } from "@/lib/teacher";
 
 
 const {Video} = new Mux(
@@ -17,7 +18,7 @@ export async function DELETE(req: Request, {params}: {params: {courseId: string}
 
   
 
-        if (!userId) {
+        if (!userId || !isTeacher(userId)) {
             return new NextResponse("Unauthorized", {status: 401});
         }
 
@@ -65,7 +66,7 @@ export async function DELETE(req: Request, {params}: {params: {courseId: string}
     }
 }
 
-export async function POST(req: Request, {params}: {params: {
+export async function PATCH(req: Request, {params}: {params: {
     courseId: string
 }}) {
     try {
@@ -73,7 +74,7 @@ export async function POST(req: Request, {params}: {params: {
         const values = await req.json();
         const {courseId} = params;
          
-        if (!userId) {
+        if (!userId || !isTeacher(userId)) {
             return new NextResponse("Unauthorized", {status: 401});
         }
         const course = await db.course.update({
