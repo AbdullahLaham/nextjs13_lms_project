@@ -46,8 +46,8 @@ export const getAnalytics = async (userId: string) => {
         console.log('[GET_ANALYTICS]', error);
         return {
             data: [],
-            totalRevenue: 0;
-            totalsales: 0;
+            totalRevenue: 0,
+            totalsales: 0,
         }
     }
 
