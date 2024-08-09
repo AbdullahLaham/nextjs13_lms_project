@@ -85,7 +85,7 @@ export async function DELETE(req: Request, {params}: {params: {courseId: string;
 
     }
 }
-export async  function PATCh (req: Request, {params}: {params: {courseId: string; chapterId: string}}) {
+export async  function PATCH (req: Request, {params}: {params: {courseId: string; chapterId: string}}) {
     
     try {
         const {userId} = auth();
