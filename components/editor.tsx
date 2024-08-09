@@ -1,7 +1,7 @@
 'use client'
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
-import 'react-quill/dest/quill.snow.css';
+// import 'react-quill/dest/quill.snow.css';
 
 interface EditorProps {
     onChange: (Value: string)  => void;

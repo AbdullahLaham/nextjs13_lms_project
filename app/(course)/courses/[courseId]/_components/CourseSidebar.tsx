@@ -4,6 +4,7 @@ import { Chapter, Course, UserProgress } from '@prisma/client'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import CourseSidebarItem from './CourseSidebarItem'
+import CourseProgress from '@/components/CourseProgress'
 interface CourseSidebarProps {
     course: Course & {
         chapters: (Chapter & {

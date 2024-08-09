@@ -7,6 +7,7 @@ import { Loader2, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
+import MuxPlayer from '@mux/mux-player-react'
 interface VideoPlayerProps {
     playbackId: string;
     courseId: string;
