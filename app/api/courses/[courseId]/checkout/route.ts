@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-export async function POST({params}: {params: {courseId: string}}) {
+export async function POST(req: Request, {params}: {params: {courseId: string}}) {
     try {
         const user = await currentUser();
         if (!user?.id || !user?.emailAddresses?.[0]?.emailAddress) {
