@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs";
 import { error } from "console";
 import { NextResponse } from "next/server";
 
-export async function Put(req: Request, {params}: {params: {courseId: string, chapterId: string}}) {
+export async function PATCH(req: Request, {params}: {params: {courseId: string, chapterId: string}}) {
     try {
         const {userId} = auth();
         const {isCompleted} = await req.json();

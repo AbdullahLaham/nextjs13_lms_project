@@ -56,5 +56,8 @@
     "uploadthing": "^5.7.4",
     "zod": "^3.22.2",
     "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13"
   }
 }
