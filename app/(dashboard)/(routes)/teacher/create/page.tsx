@@ -56,10 +56,10 @@ const CreateCoursePage = () => {
             Name your course
         </h1>
         <p>
-            what would you like to name your course? Don't worry, you can change this later
+            what would you like to name your course? Dont worry, you can change this later
         </p>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit) } className='space-y-8 mt-8 ' >
+          <form onSubmit={form.handleSubmit(onSubmit) } className='space-y-8 mt-8' >
             <FormField
               control={form.control}
               name='title'

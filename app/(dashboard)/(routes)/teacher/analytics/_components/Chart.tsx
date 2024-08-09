@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {Card, CardTitle, CardHeader, CardContent} from '@/components/ui/card'
-
+import {Bar, BarChart, ResponsiveContainer, XAxis, YAxis} from 'recharts'
 interface ChartProps {
     data: {
         name: string;

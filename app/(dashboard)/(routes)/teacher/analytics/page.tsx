@@ -3,6 +3,7 @@ import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import { DataCard } from './_components/DataCard';
+import Chart from './_components/Chart';
 
 const AnalyticsPage = async () => {
   const {userId} = auth();
