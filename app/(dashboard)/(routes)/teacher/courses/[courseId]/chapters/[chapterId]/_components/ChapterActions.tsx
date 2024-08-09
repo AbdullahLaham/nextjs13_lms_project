@@ -1,3 +1,6 @@
+"use client"
+
+
 import ConfirmModel from '@/components/models/ConfirmModel'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'

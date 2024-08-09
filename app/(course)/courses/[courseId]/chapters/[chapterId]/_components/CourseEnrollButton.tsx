@@ -1,8 +1,12 @@
+"use client"
+
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/lib/format'
 import axios from 'axios';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
+
+
 interface CourseEnrollButtonProps {
     courseId: string,
     price: number,
