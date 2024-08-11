@@ -5,11 +5,11 @@ import { useSearchParams } from "next/navigation";
 import { NextResponse } from "next/server";
 import { isTeacher } from "@/lib/teacher";
 
+const {Video}: any = new Mux({
+    tokenId: process.env.MUX_TOKEN_ID,
+    tokenSecret: process.env.MUX_TOKEN_SECRET
+});
 
-const {Video} = new Mux(
-    process.env.MUX_TOKEN_ID,
-    process.env.MUX_TOKEN_SECRET
-)
 
 export async function DELETE(req: Request, {params}: {params: {courseId: string}}) {
     try {

@@ -9,11 +9,12 @@ import { Preview } from '@/components/preview';
 import { File } from 'lucide-react';
 import { Separator } from '@radix-ui/react-separator';
 import CourseProgressButton from './_components/CourseProgressButton';
+import { Attachment } from '@prisma/client';
 
 const ChapterIdPage = async ({params}: {params: {courseId: string, chapterId: string}}) => {
     const {userId} = auth();
     if (!userId) return redirect('/');
-    const {chapter, course, muxData, attachments, nextChapter, userProgress, purchase} = await getChapter({userId, chapterId: params?.chapterId, courseId: params?.courseId});
+    const {chapter, course, muxData, attachments, nextChapter, userProgress, purchase}: any = await getChapter({userId, chapterId: params?.chapterId, courseId: params?.courseId});
     if (!chapter || !course) {
       return redirect('/');
     }
@@ -59,7 +60,7 @@ const ChapterIdPage = async ({params}: {params: {courseId: string, chapterId: st
           <>
             <Separator />
             <div>
-              {attachments?.map((attachment) => (
+              {attachments?.map((attachment: Attachment) => (
                 <a href={attachment?.url} target='_blank' key={attachment.id} className='flex items-center p-3 w-full bg-sky-200 border text-sky-700 rounded-md hover:underline' >
                   <File />
                   <p className='line-clamp-1'>{attachment?.name}</p>

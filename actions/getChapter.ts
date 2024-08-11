@@ -33,7 +33,7 @@ export const getChapter = async ({userId, courseId, chapterId}: GetChapterProps)
             }
         });
         if (!chapter || !course) {
-            throw new Error("Chapter or course not found")
+            return null
         }
         let muxData = null;
         let attachments: Attachment[] = [];

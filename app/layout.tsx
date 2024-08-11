@@ -1,11 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+// import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import ToasterProvider from '@/components/providers/toaster-provider'
 import ConfettiProvider from '@/components/providers/confettiProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'LMS APP',
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body >
           <ConfettiProvider />
           <ToasterProvider />
           {children}

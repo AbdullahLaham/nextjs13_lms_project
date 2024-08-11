@@ -1,7 +1,7 @@
-export const formatPrice = (price: number) => {
+export const formatPrice = (price: number | undefined) => {
     return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: 'USD',
 
-    }).format(price)
+    }).format(price || 0)
 }
