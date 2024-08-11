@@ -1,11 +1,8 @@
 import { db } from "@/lib/db";
 import { Course, Purchase } from "@prisma/client";
 
-type PurchaseWithCourse = Purchase & {
-    course: Course
-}
 
-const groupByCourse = (purchases: PurchaseWithCourse[]) => {
+const groupByCourse = (purchases: Purchase[]) => {
     
     const grouped: { [courseTitle: string]: number } = {}; // to chatgpt explain this code
     purchases.forEach((purchase) => {
