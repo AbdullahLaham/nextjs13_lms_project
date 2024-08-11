@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 import { isTeacher } from "@/lib/teacher";
 
 const {Video}: any = new Mux({
-    tokenId: process.env.MUX_TOKEN_ID,
+    tokenId: 'a28b746c-81ec-44c7-8def-61597d0d91d3',
     tokenSecret: process.env.MUX_TOKEN_SECRET
 });
 

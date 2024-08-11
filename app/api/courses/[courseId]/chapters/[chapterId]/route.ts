@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 import Mux from '@mux/mux-node';
 
 const {Video}: any = new Mux({
-    tokenId: process.env.MUX_TOKEN_ID,
-    tokenSecret: process.env.MUX_TOKEN_SECRET
+    tokenId: 'a28b746c-81ec-44c7-8def-61597d0d91d3',
+    tokenSecret: 
 });
 
 
