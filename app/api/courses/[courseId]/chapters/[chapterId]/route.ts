@@ -5,7 +5,7 @@ import Mux from '@mux/mux-node';
 
 const {Video}: any = new Mux({
     tokenId: 'a28b746c-81ec-44c7-8def-61597d0d91d3',
-    tokenSecret: 
+    tokenSecret: process.env.MUX_TOKEN_SECRET
 });
 
 
