@@ -7,7 +7,7 @@ import { isTeacher } from "@/lib/teacher";
 
 const {Video}: any = new Mux({
     tokenId: 'a28b746c-81ec-44c7-8def-61597d0d91d3',
-    tokenSecret: process.env.MUX_TOKEN_SECRET
+    tokenSecret: 'jBGP4NLt36d3E29z2QyFXgw3Z6VHmSCqhkXGKnptB6OpWHzTjpKQ3n/GcZ5ZjL+zZN5ltnFO6Bt'
 });
 
 
