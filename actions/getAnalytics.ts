@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { Course, Purchase } from "@prisma/client";
+import {  Purchase } from "@prisma/client";
 
 
 const groupByCourse = (purchases: Purchase[]) => {
