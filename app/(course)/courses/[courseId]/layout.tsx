@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 import CourseSidebar from './_components/CourseSidebar';
 import CourseNavbar from './_components/CourseNavbar';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 const CourseLayout = async ({children, params}: {children: React.ReactNode, params: {courseId: string}}) => {
     const {userId} = auth();
@@ -37,7 +38,8 @@ const CourseLayout = async ({children, params}: {children: React.ReactNode, para
     }
     const progressCount = await getProgress(userId, course?.id);
   return (
-    <div className='h-full'>
+    <ErrorBoundary>
+        <div className='h-full'>
         <div className='h-[80px] md:pl-80 fixed inset-y-0 w-full z-50'>
             <CourseNavbar course={course} progressCount={progressCount} />
 
@@ -50,6 +52,7 @@ const CourseLayout = async ({children, params}: {children: React.ReactNode, para
             {children}
         </main>   
     </div>
+    </ErrorBoundary>
 
   )
 }
