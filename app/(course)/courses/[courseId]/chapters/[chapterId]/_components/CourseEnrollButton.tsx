@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from '@/components/ui/button'
-import { formatPrice } from '@/lib/format'
+// import { formatPrice } from '@/lib/format'
 import axios from 'axios';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
@@ -27,7 +27,7 @@ const CourseEnrollButton = ({courseId, price}: CourseEnrollButtonProps) => {
     }
   return (
     <Button onClick={onClick} disabled={isLoading} className='w-full md:w-auto' size='sm'>
-      Enroll For{formatPrice(price) }
+      Enroll For ${price}
     </Button>
   )
 }

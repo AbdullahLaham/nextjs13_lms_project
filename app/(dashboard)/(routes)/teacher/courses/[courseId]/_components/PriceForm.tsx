@@ -23,7 +23,7 @@ import toast from 'react-hot-toast';
 import { Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
-import { formatPrice } from '@/lib/format';
+// import { formatPrice } from '@/lib/format';
 
 interface PriceFormProps {
     initialData: Course,
@@ -78,7 +78,7 @@ const PriceForm = ({initialData, courseId}: PriceFormProps) => {
         {!isEditing && 
             ( 
                 <p className={cn("text-sm mt-2 ", !initialData?.price && "text-slate-500 italic ")}>
-                    {initialData?.price ? formatPrice(initialData?.price) : "No Price"}
+                    {initialData?.price ? `$${initialData?.price}` : "No Price"}
                 </p>
             )
         }

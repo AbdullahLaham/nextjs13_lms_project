@@ -1,7 +1,7 @@
 "use client"
 
 import {Card, CardTitle, CardHeader, CardContent} from '@/components/ui/card'
-import { formatPrice } from '@/lib/format';
+// import { formatPrice } from '@/lib/format';
 
 interface DataCardProps {
     value: number | undefined;
@@ -17,7 +17,7 @@ export const DataCard = ({value, label, shouldFormat}: DataCardProps) => {
             {label}
             </CardTitle>
             <CardContent className='text-2xl font-bold'>
-                {shouldFormat ? formatPrice(value) : value}
+                {shouldFormat ? `$${value}` : value}
             </CardContent>
 
         </CardHeader>
