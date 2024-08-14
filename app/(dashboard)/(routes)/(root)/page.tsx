@@ -13,11 +13,11 @@ export default async function Dashboard() {
 
   return (
     <div className="p-6 space-y-4">
-      <div className='grid grid-cols-1 md:sm:grid-cols-2 gap-4'>
+      {/* <div className='grid grid-cols-1 md:sm:grid-cols-2 gap-4'>
         <InfoCard icon={Clock} label='In Progress' numberOfItems={coursesInProgress?.length} />
         <InfoCard icon={CheckCircle} label='In Progress' numberOfItems={completedCourses?.length} variant='success' />
       </div>
-      <CoursesList items={[...coursesInProgress, ...completedCourses]} />
+      <CoursesList items={[...coursesInProgress, ...completedCourses]} /> */}
       hello
     </div>
   )
