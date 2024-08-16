@@ -22,7 +22,7 @@ export const getProgress = async (userId: string, courseId: string): Promise<num
             }
         });
         const progressPercentage = (validCompletedChapters / publishedChapters.length) * 100;
-        return progressPercentage
+        return progressPercentage;
 
     } catch (error) {
         return 0;

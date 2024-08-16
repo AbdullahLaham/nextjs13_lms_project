@@ -21,8 +21,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body >
-          {/* <ConfettiProvider />
-          <ToasterProvider /> */}
+          <ConfettiProvider />
+          <ToasterProvider />
           {children}
         </body>
       </html>
