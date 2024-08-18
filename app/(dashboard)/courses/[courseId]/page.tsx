@@ -23,3 +23,5 @@ const CourseIdPage = async ({params}: {params: {courseId: string}}) => {
 }
 
 export default CourseIdPage
+
+
